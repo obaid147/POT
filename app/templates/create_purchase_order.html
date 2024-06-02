@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block content %}
+
+    {% if error_message %}
+        {{ error_message }}
+    {% endif %}
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Create Purchase Order -->
+            <div class="col-md-3 mb-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Create Purchase Order</h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" class="form">
+                            <div>
+                                {% csrf_token %}
+                                {% for field in form %}
+                                    <div class="form-group">
+                                        {{ field.label_tag }}
+                                        {{ field }}
+                                    </div>
+                                {% endfor %}
+                                <button type="submit" class="btn btn-outline-dark btn-light btn-sm btn-block">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Purchase Orders -->
+            <div class="col-md-8 mb-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>
+                            Purchase Orders
+                            <a href="{% url 'logout' %}?next={% url 'login' %}" class="btn btn-danger btn-sm float-right">Logout</a>
+                        </h4>
+                    </div>
+                    <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Purchase Order Number</th>
+                                        <th>Amount</th>
+                                        <th>Purchase Order ID</th>
+                                        <th>Category ID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in orders %}
+                                    <tr>
+                                        <td>{{ order.product }}</td>
+                                        <td>{{ order.purchase_order_number }}</td>
+                                        <td>{{ order.amount }}</td>
+                                        <td>{{ order.purchase_order_id }}</td>
+                                        <td>{{ order.category_id }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

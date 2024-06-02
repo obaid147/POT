@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block content%}
+
+
+<!-- registration/signup.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+</head>
+<body>
+    <h2>Sign Up</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+
+    {# Assumes you set up the Login view in your URLconf #}
+<p><a href="{% url 'login' %}">Login</a></p>
+</body>
+</html>
+
+{% endblock %}

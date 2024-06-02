@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block content%}
+
+<hr />
+<h1>
+    Purchase Orders <a href="{% url 'logout' %}?next={% url 'login' %}">Logout</a>
+</h1>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Product</th>
+                <th>purchase Order Number</th>
+                <th>Amount</th>
+                <th>Purchase Order ID</th>
+                <th>Category ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.product }}</td>
+                <td>{{ order.purchase_order_number }}</td>
+                <td>{{ order.amount }}</td>
+                <td>{{ order.purchase_order_id }}</td>
+                <!-- <td>{{ order.get_category_id_display }}</td> -->
+                <td>{{ order.category_id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
